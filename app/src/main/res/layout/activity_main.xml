@@ -20,12 +20,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="1dp"
+            android:contentDescription="@string/todo"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/backgrounds/scenic"
-            android:contentDescription="@string/todo" />
+            tools:src="@drawable/bola" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
@@ -38,19 +38,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
 
-        <Button
+        <ImageButton
             android:id="@+id/btHome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/home" />
+            app:srcCompat="@android:drawable/ic_dialog_dialer"
+            android:contentDescription="@string/todo" />
 
-        <Button
+        <ImageButton
             android:id="@+id/btNews"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/news" />
+            app:srcCompat="@android:drawable/ic_menu_mapmode"
+            android:contentDescription="@string/todo" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
