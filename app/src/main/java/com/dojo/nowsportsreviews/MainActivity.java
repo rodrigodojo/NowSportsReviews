@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     public ImageButton botaoNews;
     public JsonTask meuJson;
     public String minhaUrl = "https://api.api-futebol.com.br/v1/";
-    public String Ayutentication = "test_5a6a0e4383befd4b786b5bc7d59308";
+    public String Autentication = "test_5a6a0e4383befd4b786b5bc7d59308";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +33,9 @@ public class MainActivity extends AppCompatActivity {
 
         botaoHome = findViewById(R.id.btHome);
         botaoNews = findViewById(R.id.btNews);
+
+        meuJson = new JsonTask();
+        meuJson.execute(minhaUrl);
 
         botaoHome.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,9 +66,7 @@ public class MainActivity extends AppCompatActivity {
             try {
                 URL url = new URL(params[0]);
                 connection = (HttpURLConnection) url.openConnection();
-                // inserir o Header de autenticação para conexão.
-
-
+                connection.setRequestProperty(Autentication,minhaUrl);
                 connection.connect();
 
                 InputStream stream = connection.getInputStream();
@@ -110,6 +111,8 @@ public class MainActivity extends AppCompatActivity {
 
         public String timeCasa, timeVisitante, siglaCasa,siglaVisitante;
         public Integer placar , golCasa, golVisitante;
+
+        public noticia(){}
 
         public noticia(String timeCasa, String timeVisitante, String siglaCasa, String siglaVisitante, Integer placar, Integer golCasa, Integer golVisitante) {
             this.timeCasa = timeCasa;
