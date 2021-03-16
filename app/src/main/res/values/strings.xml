@@ -3,4 +3,6 @@
     <string name="home">Home</string>
     <string name="news">News</string>
     <string name="todo">TODO</string>
+    <string name="noticias">Noticias</string>
+    <string name="back">Back</string>
 </resources>
