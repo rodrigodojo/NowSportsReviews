@@ -2,7 +2,6 @@ package com.dojo.nowsportsreviews;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -23,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     public ImageButton botaoHome;
     public ImageButton botaoNews;
     public JsonTask meuJson;
-    public String minhaUrl = "https://www.json-generator.com/api/json/get/cgxrCqHdpe?indent=2";
+    public String minhaUrl = "https://api.api-futebol.com.br/v1/campeonatos/10/rodadas";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
