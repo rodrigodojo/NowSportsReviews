@@ -22,7 +22,9 @@ public class MainActivity extends AppCompatActivity {
     public ImageButton botaoHome;
     public ImageButton botaoNews;
     public JsonTask meuJson;
-    public String minhaUrl = "https://api.api-futebol.com.br/v1/campeonatos/10/rodadas";
+    private static String minhaUrl = "https://api.api-futebol.com.br/v1/campeonatos/10/rodadas";
+    private static String autorizacao = "test_5a6a0e4383befd4b786b5bc7d59308";
+    private static String nomeUsuario = "rodrigo";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
             try {
                 URL url = new URL(params[0]);
                 connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestProperty(nomeUsuario,autorizacao);
                 connection.connect();
                 Log.i("meuLog","conectou com sucesso");
 
