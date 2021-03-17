@@ -23,19 +23,19 @@ public class MainActivity extends AppCompatActivity {
     public ImageButton botaoHome;
     public ImageButton botaoNews;
     public JsonTask meuJson;
-    public String minhaUrl = "https://api.api-futebol.com.br/v1/";
-    public String Autentication = "test_5a6a0e4383befd4b786b5bc7d59308";
+    public String minhaUrl = "https://www.json-generator.com/api/json/get/cgxrCqHdpe?indent=2";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        Log.i("meuLog:","carregando.");
         botaoHome = findViewById(R.id.btHome);
         botaoNews = findViewById(R.id.btNews);
 
         meuJson = new JsonTask();
         meuJson.execute(minhaUrl);
+        Log.i("meuLog:","Iniciou aqui.");
 
         botaoHome.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         botaoNews.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.i("meuLog:","foi para a Second Astivity");
                 Intent i = new Intent(getBaseContext(),ActivitySecond.class);
                 startActivity(i);
             }
@@ -66,8 +67,8 @@ public class MainActivity extends AppCompatActivity {
             try {
                 URL url = new URL(params[0]);
                 connection = (HttpURLConnection) url.openConnection();
-                connection.setRequestProperty(Autentication,minhaUrl);
                 connection.connect();
+                Log.i("meuLog","conectou com sucesso");
 
                 InputStream stream = connection.getInputStream();
                 reader = new BufferedReader(new InputStreamReader(stream));
