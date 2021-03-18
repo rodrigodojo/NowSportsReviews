@@ -5,4 +5,10 @@
     <string name="todo">TODO</string>
     <string name="noticias">Noticias</string>
     <string name="back">Back</string>
+    <string name="placar">placar</string>
+    <string name="titulo">Titulo</string>
+    <string name="timevisitante">timeVisitante</string>
+    <string name="siglavisitante">siglaVisitante</string>
+    <string name="timecasa">timeCasa</string>
+    <string name="siglacasa">siglaCasa</string>
 </resources>

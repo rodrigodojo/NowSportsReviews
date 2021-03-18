@@ -8,6 +8,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -16,12 +22,17 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
     public ImageButton botaoHome;
     public ImageButton botaoNews;
+    //public TextView titulo;
     public JsonTask meuJson;
+    public JSONArray rodada;
+    public ArrayList<Noticia> listaNoticia;
+    private static String minhaUrlTeste = "https://www.json-generator.com/api/json/get/bOyISbKdlu?indent=2";
     private static String minhaUrl = "https://api.api-futebol.com.br/v1/campeonatos/10/rodadas";
     private static String autorizacao = "test_5a6a0e4383befd4b786b5bc7d59308";
     private static String nomeUsuario = "rodrigo";
@@ -34,14 +45,15 @@ public class MainActivity extends AppCompatActivity {
         botaoHome = findViewById(R.id.btHome);
         botaoNews = findViewById(R.id.btNews);
 
+        listaNoticia = new ArrayList<>();
         meuJson = new JsonTask();
-        meuJson.execute(minhaUrl);
+        meuJson.execute(minhaUrlTeste);
         Log.i("meuLog:","Iniciou aqui.");
 
         botaoHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Toast.makeText(MainActivity.this,"Bem-vindo ao Now Sports News",Toast.LENGTH_LONG).show();
             }
         });
 
@@ -49,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.i("meuLog:","foi para a Second Astivity");
+                Toast.makeText(MainActivity.this,"Noticias da rodada",Toast.LENGTH_LONG).show();
                 Intent i = new Intent(getBaseContext(),ActivitySecond.class);
                 startActivity(i);
             }
@@ -68,9 +81,9 @@ public class MainActivity extends AppCompatActivity {
             try {
                 URL url = new URL(params[0]);
                 connection = (HttpURLConnection) url.openConnection();
-                connection.setRequestProperty(nomeUsuario,autorizacao);
+                //connection.setRequestProperty(nomeUsuario,autorizacao);
                 connection.connect();
-                Log.i("meuLog","conectou com sucesso");
+                Log.i("meuLog", "conectou com sucesso");
 
                 InputStream stream = connection.getInputStream();
                 reader = new BufferedReader(new InputStreamReader(stream));
@@ -107,80 +120,27 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
 
-        }
-    }
+            try {
+                JSONObject listaJson = new JSONObject(result);
+                //titulo.setText(listaJson.getString("titulo"));
+                JSONArray rodada = listaJson.getJSONArray("questionario");
 
-    public class noticia {
+                for (int i = 0; i < rodada.length(); i++) {
+                    JSONObject noticia = rodada.getJSONObject(i);;
 
-        public String timeCasa, timeVisitante, siglaCasa,siglaVisitante;
-        public Integer placar , golCasa, golVisitante;
+                    String timeCasa = noticia.getString("timeCasa");
+                    String timeVisitante = noticia.getString("timeVisitante");
+                    String siglaCasa = noticia.getString("siglaCasa");
+                    String siglaVisitante = noticia.getString("siglaVisitante");
+                    String placar = noticia.getString("placar");
 
-        public noticia(){}
+                    Noticia minhaNoticia = new Noticia(timeCasa, timeVisitante, siglaCasa, siglaVisitante, placar);
+                    listaNoticia.add(minhaNoticia);
+                }
 
-        public noticia(String timeCasa, String timeVisitante, String siglaCasa, String siglaVisitante, Integer placar, Integer golCasa, Integer golVisitante) {
-            this.timeCasa = timeCasa;
-            this.timeVisitante = timeVisitante;
-            this.siglaCasa = siglaCasa;
-            this.siglaVisitante = siglaVisitante;
-            this.placar = placar;
-            this.golCasa = golCasa;
-            this.golVisitante = golVisitante;
-        }
-
-        public String getTimeCasa() {
-            return timeCasa;
-        }
-
-        public void setTimeCasa(String timeCasa) {
-            this.timeCasa = timeCasa;
-        }
-
-        public String getTimeVisitante() {
-            return timeVisitante;
-        }
-
-        public void setTimeVisitante(String timeVisitante) {
-            this.timeVisitante = timeVisitante;
-        }
-
-        public String getSiglaCasa() {
-            return siglaCasa;
-        }
-
-        public void setSiglaCasa(String siglaCasa) {
-            this.siglaCasa = siglaCasa;
-        }
-
-        public String getSiglaVisitante() {
-            return siglaVisitante;
-        }
-
-        public void setSiglaVisitante(String siglaVisitante) {
-            this.siglaVisitante = siglaVisitante;
-        }
-
-        public Integer getPlacar() {
-            return placar;
-        }
-
-        public void setPlacar(Integer placar) {
-            this.placar = placar;
-        }
-
-        public Integer getGolCasa() {
-            return golCasa;
-        }
-
-        public void setGolCasa(Integer golCasa) {
-            this.golCasa = golCasa;
-        }
-
-        public Integer getGolVisitante() {
-            return golVisitante;
-        }
-
-        public void setGolVisitante(Integer golVisitante) {
-            this.golVisitante = golVisitante;
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
