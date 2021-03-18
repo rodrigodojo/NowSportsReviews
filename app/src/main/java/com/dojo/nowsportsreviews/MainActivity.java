@@ -48,9 +48,6 @@ public class MainActivity extends AppCompatActivity {
         meuJson.execute(minhaUrlTeste);
         Log.i("meuLog:","Iniciou aqui.");
 
-        MeuAdaptador meuAdaptador = new MeuAdaptador(listaNoticia,getApplicationContext());
-
-
         botaoHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
