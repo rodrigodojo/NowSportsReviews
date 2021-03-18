@@ -20,8 +20,8 @@ public class MeuViewHolder extends RecyclerView.ViewHolder {
 
         siglaCasa = itemView.findViewById(R.id.txtSiglaCasa);
         timeCasa = itemView.findViewById(R.id.txtTimeCasa);
-        siglaVisitante = itemView.findViewById(R.id.txtTimeVisitante);
-        timeVisitante = itemView.findViewById(R.id.txtSiglaVisitante);
+        siglaVisitante = itemView.findViewById(R.id.txtSiglaVisitante);
+        timeVisitante = itemView.findViewById(R.id.txtTimeVisitante);
         placar = itemView.findViewById(R.id.txtPlacar);
         titulo = itemView.findViewById(R.id.txtTitulo);
     }

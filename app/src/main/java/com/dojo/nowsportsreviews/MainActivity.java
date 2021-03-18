@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     public ImageButton botaoNews;
     public JsonTask meuJson;
     public ArrayList<Noticia> listaNoticia;
-    private static String minhaUrlTeste = "https://www.json-generator.com/api/json/get/bOyISbKdlu?indent=2";
+    private static String minhaUrlTeste = "https://www.json-generator.com/api/json/get/cvlKbvCoaG?indent=2";
     private static String minhaUrl = "https://api.api-futebol.com.br/v1/campeonatos/10/rodadas";
     private static String autorizacao = "test_5a6a0e4383befd4b786b5bc7d59308";
     private static String nomeUsuario = "rodrigo";
