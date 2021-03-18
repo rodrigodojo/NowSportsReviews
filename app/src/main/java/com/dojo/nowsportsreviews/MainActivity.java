@@ -1,6 +1,7 @@
 package com.dojo.nowsportsreviews;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -28,9 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
     public ImageButton botaoHome;
     public ImageButton botaoNews;
-    //public TextView titulo;
     public JsonTask meuJson;
-    public JSONArray rodada;
     public ArrayList<Noticia> listaNoticia;
     private static String minhaUrlTeste = "https://www.json-generator.com/api/json/get/bOyISbKdlu?indent=2";
     private static String minhaUrl = "https://api.api-futebol.com.br/v1/campeonatos/10/rodadas";
@@ -44,11 +43,13 @@ public class MainActivity extends AppCompatActivity {
         Log.i("meuLog:","carregando.");
         botaoHome = findViewById(R.id.btHome);
         botaoNews = findViewById(R.id.btNews);
-
         listaNoticia = new ArrayList<>();
         meuJson = new JsonTask();
         meuJson.execute(minhaUrlTeste);
         Log.i("meuLog:","Iniciou aqui.");
+
+        MeuAdaptador meuAdaptador = new MeuAdaptador(listaNoticia,getApplicationContext());
+
 
         botaoHome.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.i("meuLog:","foi para a Second Astivity");
                 Toast.makeText(MainActivity.this,"Noticias da rodada",Toast.LENGTH_LONG).show();
                 Intent i = new Intent(getBaseContext(),ActivitySecond.class);
+                ActivitySecond.listaNoticia = listaNoticia;
                 startActivity(i);
             }
         });
@@ -122,7 +124,6 @@ public class MainActivity extends AppCompatActivity {
 
             try {
                 JSONObject listaJson = new JSONObject(result);
-                //titulo.setText(listaJson.getString("titulo"));
                 JSONArray rodada = listaJson.getJSONArray("questionario");
 
                 for (int i = 0; i < rodada.length(); i++) {
